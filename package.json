@@ -1,0 +1,28 @@
+{
+  "name": "adventofcode",
+  "version": "1.0.0",
+  "description": "This is my collection of Advent of Code solutions, written in TypeScript.",
+  "main": "index.js",
+  "dependencies": {
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.11",
+    "ts-node": "^10.4.0"
+  },
+  "scripts": {
+    "start": "tsc & node ./dist/index.js",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dianasaurr/adventofcode.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dianasaurr/adventofcode/issues"
+  },
+  "homepage": "https://github.com/dianasaurr/adventofcode#readme"
+}

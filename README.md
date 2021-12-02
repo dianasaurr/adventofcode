@@ -1,0 +1,1 @@
+This is my collection of Advent of Code solutions, written in TypeScript.
