@@ -23,7 +23,6 @@ function getInput(problem: number, part: number): string[] {
 
 function solvePart1(input: string[]) {
     const { ones, zeros, length } = countOnesAndZeros(input);
-    // console.log(ones, zeros, length);
     let gammaBinaryString = '';
     let epsilonBinaryString = '';
 
@@ -40,10 +39,8 @@ function solvePart1(input: string[]) {
         }
     }
 
-    // console.log(gammaBinaryString, epsilonBinaryString);
     const gamma = convertToBinary(gammaBinaryString);
     const epsilon = convertToBinary(epsilonBinaryString);
-    // console.log(gamma, epsilon);
     return (gamma * epsilon).toString();
 }
 
@@ -54,6 +51,25 @@ function solvePart2(input: string[]) {
     const oxygen = convertToBinary(oxygenBinaryString);
     const c02 = convertToBinary(c02ratingBinaryString);
     return (oxygen * c02).toString();
+}
+
+function countOnesAndZeros(input: string[]) {
+    const length = input[0].length - 1;
+    let ones = new Array(length).fill(0);
+    let zeros = new Array(length).fill(0);
+
+    input.forEach(line => {
+        for (var i = 0; i < length; i++) {
+            const c = line.charAt(i);
+            c == '0' ? zeros[i]++ : ones[i]++;
+        }
+    })
+
+    return { ones, zeros, length };
+}
+
+function convertToBinary(string: string) {
+    return parseInt(string, 2);
 }
 
 function getOxygenRating(input: string[]): string {
@@ -78,25 +94,6 @@ function getOxygenRating(input: string[]): string {
     }
     
     return eligible[0];
-}
-
-function countOnesAndZeros(input: string[]) {
-    const length = input[0].length;
-    let ones = new Array(length).fill(0);
-    let zeros = new Array(length).fill(0);
-
-    input.forEach(line => {
-        for (var i = 0; i < length; i++) {
-            const c = line.charAt(i);
-            c == '0' ? zeros[i]++ : ones[i]++;
-        }
-    })
-
-    return { ones, zeros, length };
-}
-
-function convertToBinary(string: string) {
-    return parseInt(string, 2);
 }
 
 function getC02Rating(input: string[]): string {
