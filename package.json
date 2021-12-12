@@ -4,6 +4,7 @@
   "description": "This is my collection of Advent of Code solutions, written in TypeScript.",
   "main": "index.js",
   "dependencies": {
+    "chalk": "^5.0.0",
     "typescript": "^4.5.2"
   },
   "devDependencies": {
