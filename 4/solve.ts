@@ -1,5 +1,5 @@
 import fs from 'fs';
-import BingoCard from './game';
+import BingoCard from './bingocard';
 
 export default function solve(problem: number, part: number) {
     const input = getInput(problem, part);
@@ -24,7 +24,8 @@ function getInput(problem: number, part: number) {
 
 function transformInput(inputString: string) {
     const splitInput = inputString.split('\n\n');
-    const inputs = splitInput[0].split(' ');
+    const inputs = splitInput[0].split(',').map(x => parseInt(x));
+
     const bingoCards = splitInput.slice(1).map(cardString => {
         const card: number[][] = [];
         cardString.split('\n').forEach(rowString => {
@@ -33,35 +34,50 @@ function transformInput(inputString: string) {
         });
         return new BingoCard(card);
     })
+    
     return { inputs, bingoCards };
 }
 
 function solvePart1(input: string) {
     const { inputs, bingoCards } = transformInput(input);
-    inputs.forEach(input => {
-        console.log(input);
-        bingoCards.forEach(card => card.drawNumber(parseInt(input)));
+    for (const input of inputs) {
+        bingoCards.forEach(card => {
+            card.drawNumber(input);
+            // card.display();
+        });
         const winner = bingoCards.filter(card => card.isBingo());
         
-        if (winner) {
-            console.log('bingo!');
-            console.log(number, card.sumUnmarked());
-            return (card.sumUnmarked() * number).toString();
+        if (winner.length !== 0) {
+            winner[0].display();
+            // console.log(input, winner[0].sumUnmarked());
+            return (winner[0].sumUnmarked() * input).toString();
         }
-        // for (let i = 0; i < bingoCards.length; i++) {
-        //     const card = bingoCards[i];
-        //     card.print();
-        //     const number = parseInt(input);
-        //     if (card.drawAndTestBingo(number) !== false) {
-        //         console.log('bingo!');
-        //         console.log(number, card.sumUnmarked());
-        //         return (card.sumUnmarked() * number).toString();
-        //     }
-        // }
-    })
-    return "fail"
+    }
+    return "fail";
 }
 
 function solvePart2(input: string) {
-    return "Not implemented yet";
+    const { inputs, bingoCards } = transformInput(input);
+    let lastLoser = null;
+
+    for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+        bingoCards.forEach(card => {
+            card.drawNumber(input);
+            // card.display();
+        });
+        const losers = bingoCards.filter(card => !card.isBingo());
+        
+        if (losers.length == 1) {
+            lastLoser = losers[0];
+            lastLoser.display();
+        } else if (losers.length == 0) {
+            // keep picking until the last one wins
+            const sum = lastLoser?.sumUnmarked() ?? 0;
+            // console.log(input, sum);
+            return (sum * input).toString();
+        }
+    }
+
+    return "fail";
 }
