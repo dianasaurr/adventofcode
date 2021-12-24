@@ -12,13 +12,17 @@ export default function solve(problem: number, part: number) {
 }
 
 function getInput(problem: number) {
-    const filename = `${process.cwd}/${problem}/input.txt`;
+    const filename = `${process.cwd()}/${problem}/input.txt`;
     try {
         return fs.readFileSync(filename, 'utf8');
     } catch (err) {
         console.error(err);
         return '';
     }
+}
+
+function transformInput(inputString: string) {
+    return;
 }
 
 function solvePart1(input: string) {
