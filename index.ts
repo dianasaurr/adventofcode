@@ -1,6 +1,6 @@
-import solve from './4/solve';
+import solve from './6/solve';
 
-const problem = 4;
+const problem = 6;
 const part = 2;
 
 export function start() {
