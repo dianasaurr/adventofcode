@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 export default function solve(problem: number, part: number) {
-    const input = getInput(problem, part);
+    const input = getInput(problem);
     let solution = '';
     if (part === 1) {
         solution = solvePart1(input);
@@ -11,8 +11,8 @@ export default function solve(problem: number, part: number) {
     return solution;
 }
 
-function getInput(problem: number, part: number) {
-    const filename = `${process.cwd}/${problem}/input${part}.txt`;
+function getInput(problem: number) {
+    const filename = `${process.cwd}/${problem}/input.txt`;
     try {
         return fs.readFileSync(filename, 'utf8');
     } catch (err) {
